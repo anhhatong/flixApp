@@ -14,11 +14,6 @@ class MovieGridViewController: UIViewController, UICollectionViewDelegate, UICol
     
     var movies = [[String:Any]]();
     
-    // Upon going to root Superhero, display tabbar
-    override func viewWillAppear(_ animated: Bool) {
-        self.tabBarController?.tabBar.isHidden = false
-    }
-
     override func viewDidLoad() {
         super.viewDidLoad()
                 

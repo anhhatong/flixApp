@@ -14,11 +14,6 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
 
     @IBOutlet weak var movieTableView: UITableView!
     
-    // Upon going to root Now Playing, display tabbar
-    override func viewWillAppear(_ animated: Bool) {
-        self.tabBarController?.tabBar.isHidden = false
-    }
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         movieTableView.rowHeight = 169;
