@@ -13,6 +13,13 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     var movies = [[String:Any]]();
 
     @IBOutlet weak var movieTableView: UITableView!
+    
+    // Upon going to root Now Playing, display tabbar
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.tabBarController?.tabBar.isHidden = false
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         movieTableView.rowHeight = 169;
@@ -66,6 +73,26 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         cell.moviePoster.af.setImage(withURL: posterURL!);
         
         return cell;
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        // Find the selected movie
+        // sender is generic so we have to typecast to type UITableViewCell to
+        // get index of the cell
+        let cell = sender as! UITableViewCell;
+        let indexPath = movieTableView.indexPath(for: cell)!;
+        let movie = movies[indexPath.row];
+        
+        // Pass that movie data to the next screen
+        // segue.destination knows the destination view but
+        // we have to typecast it to MovieDetailViewController to
+        // be able to retreive "movie" variable from there
+        let detailViewController = segue.destination as! MovieDetailViewController;
+        detailViewController.movie = movie;
+        
+        // Hide tabbar upon leaving now playing screen to the
+        // next screen in the same stack
+        self.tabBarController?.tabBar.isHidden = true
     }
 }
 
