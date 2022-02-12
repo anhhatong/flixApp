@@ -16,7 +16,6 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     
     // Upon going to root Now Playing, display tabbar
     override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
         self.tabBarController?.tabBar.isHidden = false
     }
     
@@ -89,10 +88,6 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         // be able to retreive "movie" variable from there
         let detailViewController = segue.destination as! MovieDetailViewController;
         detailViewController.movie = movie;
-        
-        // Hide tabbar upon leaving now playing screen to the
-        // next screen in the same stack
-        self.tabBarController?.tabBar.isHidden = true
     }
 }
 

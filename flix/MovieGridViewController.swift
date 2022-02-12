@@ -14,6 +14,10 @@ class MovieGridViewController: UIViewController, UICollectionViewDelegate, UICol
     
     var movies = [[String:Any]]();
     
+    // Upon going to root Superhero, display tabbar
+    override func viewWillAppear(_ animated: Bool) {
+        self.tabBarController?.tabBar.isHidden = false
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -67,15 +71,20 @@ class MovieGridViewController: UIViewController, UICollectionViewDelegate, UICol
         return cell;
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+        // Find the selected movie
+        // sender is generic so we have to typecast to type UITableViewCell to
+        // get index of the cell
+        let cell = sender as! UICollectionViewCell;
+        let indexPath = movieGridCollectionView.indexPath(for: cell)!;
+        let movie = movies[indexPath.row];
+        
+        // Pass that movie data to the next screen
+        // segue.destination knows the destination view but
+        // we have to typecast it to MovieDetailViewController to
+        // be able to retreive "movie" variable from there
+        let detailViewController = segue.destination as! MovieDetailViewController;
+        detailViewController.movie = movie;
     }
-    */
 
 }
